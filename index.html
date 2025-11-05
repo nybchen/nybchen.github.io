@@ -23,10 +23,13 @@
             --bg-dark: #3b3838;
             --text-light: #3b3838;
             --text-dark: #e6d7ca;
+            --accent: #685a4b;
+            --accent-hover: #5f513e;
+        }
+        .dark {
             --accent: #a39283;
             --accent-hover: #c4b6a9;
         }
-
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -194,7 +197,8 @@
         }
 
         .profile-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             font-size: clamp(1.125rem, 2.5vw, 1.5rem);
             color: var(--accent);
             text-decoration: none;
@@ -203,6 +207,10 @@
             padding: 0;
             cursor: pointer;
             transition: color 0.3s ease;
+            line-height: 1;
+            vertical-align: middle;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         .profile-link:hover,
