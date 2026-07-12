@@ -52,6 +52,14 @@
             display: none !important;
         }
 
+        [data-lang].hidden {
+            display: none !important;
+        }
+
+        [data-lang="zh"] {
+            font-size: 1.14em;
+        }
+
         #page-container {
             min-height: 100vh;
             width: 100%;
@@ -235,10 +243,103 @@
             gap: 1.5rem;
         }
 
+        #page-container.about-open {
+            align-items: flex-start;
+            overflow-y: auto;
+        }
+
+        #page-container.about-open #content-wrapper {
+            transform: none;
+            padding-top: 90px;
+            padding-bottom: 3rem;
+        }
+
+        .about-page {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-intro {
+            min-height: auto;
+            justify-content: flex-start;
+            text-align: left;
+            margin-bottom: 0;
+        }
+
         .about-content p {
             margin: 0;
             font-size: clamp(1.125rem, 2.5vw, 1.5rem);
             line-height: 1.6;
+        }
+
+        .experience-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .experience-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: minmax(5.8rem, 0.26fr) 1fr;
+            gap: 0.75rem 0.6rem;
+            align-items: start;
+        }
+
+        .experience-time {
+            color: var(--accent);
+            font-size: clamp(0.95rem, 2vw, 1.125rem);
+            line-height: 1.4;
+            padding-top: 0.3rem;
+        }
+
+        .experience-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            min-width: 0;
+        }
+
+        .experience-role {
+            margin: 0;
+            font-size: clamp(1.05rem, 2.25vw, 1.35rem);
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .experience-meta {
+            margin: 0;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 1.45;
+        }
+
+        .experience-note {
+            margin: 0;
+            font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+            line-height: 1.45;
+            color: var(--accent);
+        }
+
+        @media (max-width: 520px) {
+            .experience-item {
+                grid-template-columns: 1fr;
+            }
         }
 
         .about-content a {
@@ -262,8 +363,20 @@
             color: var(--accent-hover);
         }
 
-        #back-button {
-            align-self: flex-start;
+        .about-content .experience-role a,
+        .about-content .experience-role a:hover,
+        .about-content .experience-role a:focus-visible,
+        .dark .about-content .experience-role a,
+        .dark .about-content .experience-role a:hover,
+        .dark .about-content .experience-role a:focus-visible {
+            color: inherit;
+        }
+
+        .about-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -298,19 +411,70 @@
                 <div class="profile-links">
                     <button id="about-toggle" class="profile-link">About</button>
                     <a href="mailto:bchen2333@gmail.com" target="_blank" rel="noopener noreferrer" class="profile-link">Email</a>
-                    <a href="https://linkedin.com/m/in/bruno-chen-04bb4527b/" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/nybchen/" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
                 </div>
             </div>
 
             <!-- About content section - hidden by default, shares wrapper alignment -->
             <div id="about-content" class="about-content hidden">
-                <p>
-                    My name is Bruno Chen. I am from <a href="https://en.wikipedia.org/wiki/Dongguan" target="_blank" rel="noopener noreferrer">Dongguan, China</a>. I am a freshman in <a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">Carnegie Mellon University</a> majoring in Statistics and Machine Learning.
-                </p>
-                <p>
-                    我是陈诺优，来自<a href="https://zh.wikipedia.org/wiki/东莞市" target="_blank" rel="noopener noreferrer">广东东莞</a>，现在是<a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">卡耐基梅隆大学</a>统计与机器学习专业的一名大一学生。
-                </p>
-                <button id="back-button" class="profile-link">Back</button>
+                <div class="about-actions">
+                    <button id="back-button" class="profile-link" type="button">Back</button>
+                    <button id="language-toggle" class="profile-link" type="button">中文</button>
+                </div>
+                <section class="about-page about-intro">
+                    <p data-lang="en">
+                        My name is Bruno Chen. I am from <a href="https://en.wikipedia.org/wiki/Dongguan" target="_blank" rel="noopener noreferrer">Dongguan, China</a>. I am a sophomore at <a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">Carnegie Mellon University</a> majoring in Statistics and Machine Learning.
+                    </p>
+                    <p data-lang="zh" class="hidden">
+                        我是陈诺优，来自<a href="https://zh.wikipedia.org/wiki/东莞市" target="_blank" rel="noopener noreferrer">广东东莞</a>，现在是<a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">卡耐基梅隆大学</a>统计与机器学习专业的一名大二学生。
+                    </p>
+                </section>
+                <section class="about-page experience-section" aria-labelledby="experience-heading">
+                    <h3 id="experience-heading" class="section-title" data-lang="en">Experience</h3>
+                    <h3 class="section-title hidden" data-lang="zh">经历</h3>
+                    <ul class="experience-list">
+                        <li class="experience-item">
+                            <span class="experience-time" data-lang="en">May 2026 -<br>Present</span>
+                            <span class="experience-time hidden" data-lang="zh">2026年5月 -<br>至今</span>
+                            <div class="experience-detail">
+                                <p class="experience-role" data-lang="en">Robot Learning Engineer</p>
+                                <p class="experience-role hidden" data-lang="zh">算法工程师</p>
+                                <p class="experience-meta" data-lang="en">NeoteAI</p>
+                                <p class="experience-meta hidden" data-lang="zh">上海新智具身智能</p>
+                                <p class="experience-note" data-lang="en">Shanghai</p>
+                                <p class="experience-note hidden" data-lang="zh">上海</p>
+                            </div>
+                        </li>
+                        <li class="experience-item">
+                            <span class="experience-time" data-lang="en">Mar 2025 -<br>Aug 2025</span>
+                            <span class="experience-time hidden" data-lang="zh">2025年3月 -<br>2025年8月</span>
+                            <div class="experience-detail">
+                                <p class="experience-role" data-lang="en">Student Research Assistant</p>
+                                <p class="experience-role hidden" data-lang="zh">学生研究助理</p>
+                                <p class="experience-meta" data-lang="en">The Chinese University of Hong Kong, Shenzhen</p>
+                                <p class="experience-meta hidden" data-lang="zh">香港中文大学（深圳）</p>
+                                <p class="experience-note" data-lang="en">Shenzhen</p>
+                                <p class="experience-note hidden" data-lang="zh">深圳</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <section class="about-page experience-section" aria-labelledby="education-heading">
+                    <h3 id="education-heading" class="section-title" data-lang="en">Education</h3>
+                    <h3 class="section-title hidden" data-lang="zh">教育</h3>
+                    <ul class="experience-list">
+                        <li class="experience-item">
+                            <span class="experience-time" data-lang="en">2025 -<br>2029</span>
+                            <span class="experience-time hidden" data-lang="zh">2025年 -<br>2029年</span>
+                            <div class="experience-detail">
+                                <p class="experience-role" data-lang="en"><a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">Carnegie Mellon University</a></p>
+                                <p class="experience-role hidden" data-lang="zh"><a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">卡耐基梅隆大学</a></p>
+                                <p class="experience-meta" data-lang="en">B.S. in Statistics and Machine Learning</p>
+                                <p class="experience-meta hidden" data-lang="zh">理学学士，统计与机器学习</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
             </div>
         </div>
 
@@ -358,12 +522,27 @@
             const aboutContent = document.getElementById('about-content');
             const mainContent = document.getElementById('main-content');
             const backButton = document.getElementById('back-button');
+            const languageToggle = document.getElementById('language-toggle');
+            const localizedContent = Array.from(document.querySelectorAll('[data-lang]'));
+            const pageContainer = document.getElementById('page-container');
+            let currentLanguage = 'en';
+
+            function setLanguage(language) {
+                currentLanguage = language;
+                localizedContent.forEach((element) => {
+                    element.classList.toggle('hidden', element.dataset.lang !== currentLanguage);
+                });
+                languageToggle.textContent = currentLanguage === 'en' ? '中文' : 'English';
+            }
 
             aboutToggle.addEventListener('click', () => {
                 // Hide main content (keep theme toggle visible)
                 mainContent.classList.add('hidden');
                 // Show about content
                 aboutContent.classList.remove('hidden');
+                pageContainer.classList.add('about-open');
+                setLanguage('en');
+                window.scrollTo({ top: 0, behavior: 'auto' });
             });
 
             backButton.addEventListener('click', () => {
@@ -371,6 +550,12 @@
                 aboutContent.classList.add('hidden');
                 // Show main content (theme toggle remains visible)
                 mainContent.classList.remove('hidden');
+                pageContainer.classList.remove('about-open');
+                window.scrollTo({ top: 0, behavior: 'auto' });
+            });
+
+            languageToggle.addEventListener('click', () => {
+                setLanguage(currentLanguage === 'en' ? 'zh' : 'en');
             });
         })();
     </script>
